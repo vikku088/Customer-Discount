@@ -43,7 +43,7 @@ class Collection extends Action
         $result = $this->resultJsonFactory->create();
         $customerGroupId = $this->getRequest()->getParam('customerGroupId');
         $customers = $this->_customerCollection->create()->addFieldToFilter('group_id',$customerGroupId);
-        if(!empty($customers)){
+        if(count($customers->getData()) !== 0){
             foreach ($customers as $customerCollection ) {
                 $id = $customerCollection->getId();
                 $customer[$id] = $customerCollection->getName();

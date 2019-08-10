@@ -52,7 +52,20 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
                         dataType: 'json',
                         type: 'POST'
                     }).done(function(data) {
-                        console.log(data);
+                        if(data){
+                            var jsonData = [data];
+                            for(var obj in jsonData){
+                                if(jsonData.hasOwnProperty(obj)){
+                                    for(var prop in jsonData[obj]){
+                                        if(jsonData[obj].hasOwnProperty(prop)){
+                                           $('#page_customer').append('<option value ='+ prop+'>'+jsonData[obj][prop]+'</option>');
+                                        }
+                                    }
+                                }
+                            }
+                        }else{
+                            $('#page_customer').html(' ');
+                        }
                     });
                 });
             

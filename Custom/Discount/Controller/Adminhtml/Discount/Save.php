@@ -37,6 +37,8 @@ class Save extends \Magento\Backend\App\Action
             if ($id) {
                 $model->load($id);
             }
+            $data['customer'] = implode(",",$data['customer']);
+            $data['store_view'] = implode(",",$data['store_view']);
 			
             $model->setData($data);
 			
