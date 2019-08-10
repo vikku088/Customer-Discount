@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Custom. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Backend/etc/menu.xsd">
+    <menu>
+        <add id="Custom_Discount::custom_discount_index" title="Customer Discount" module="Custom_Discount"  sortOrder="20" dependsOnModule="Custom_Discount" action="discount/discount/index" resource="Custom_Discount::custom_discount_index"/>
+<!--AddMenu-->
+    </menu>
+</config>
