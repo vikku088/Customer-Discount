@@ -8,7 +8,6 @@ use Magento\Framework\View\Result\PageFactory;
 
 class Collection extends Action
 {
-    protected $_customerCollection; 
     /**
      * @var \Magento\Framework\View\Result\PageFactory
      */
@@ -20,6 +19,7 @@ class Collection extends Action
      * @var \Magento\Backend\Model\View\Result\Page
      */
     protected $resultPage;
+    protected $_helper;
 
     /**
      * @param Context $context
@@ -28,21 +28,21 @@ class Collection extends Action
     public function __construct(
         Context $context,
         PageFactory $resultPageFactory,
-        \Magento\Customer\Model\ResourceModel\Customer\CollectionFactory $customerFactory,
-        \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory
+        \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory,
+        \Custom\Discount\Helper\Data $helper
     )
     {
         parent::__construct($context);
-        $this->_customerCollection = $customerFactory;
         $this->resultPageFactory = $resultPageFactory;
         $this->resultJsonFactory = $resultJsonFactory;
+        $this->_helper = $helper;
     }
 
     public function execute()
     {
         $result = $this->resultJsonFactory->create();
         $customerGroupId = $this->getRequest()->getParam('customerGroupId');
-        $customers = $this->_customerCollection->create()->addFieldToFilter('group_id',$customerGroupId);
+        $customers = $this->_helper->getCustomersByGroupId($customerGroupId);
         if(count($customers->getData()) !== 0){
             foreach ($customers as $customerCollection ) {
                 $id = $customerCollection->getId();

@@ -203,7 +203,6 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                 'class' => 'coupon_code'
             ]
         );
-		/*{{CedAddGridColumn}}*/
 
         $block = $this->getLayout()->getBlock('grid.bottom.links');
         if ($block) {

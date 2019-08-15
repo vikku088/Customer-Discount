@@ -20,7 +20,7 @@ class Coupons extends Action
      * @var \Magento\Backend\Model\View\Result\Page
      */
     protected $resultPage;
-    protected $saleRule;
+    protected $_helper;
 
     /**
      * @param Context $context
@@ -31,21 +31,21 @@ class Coupons extends Action
         PageFactory $resultPageFactory,
         \Magento\Customer\Model\ResourceModel\Customer\CollectionFactory $customerFactory,
         \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory,
-        \Magento\SalesRule\Model\Rule $saleRule
+        \Custom\Discount\Helper\Data $helper
     )
     {
         parent::__construct($context);
         $this->_customerCollection = $customerFactory;
         $this->resultPageFactory = $resultPageFactory;
         $this->resultJsonFactory = $resultJsonFactory;
-        $this->saleRule = $saleRule;
+        $this->_helper = $helper;
     }
 
     public function execute()
     {
         $result = $this->resultJsonFactory->create();
         $customerGroupId = $this->getRequest()->getParam('customerGroupId');
-        $couponCollection = $this->saleRule->getCollection()->addFieldToFilter('is_active',1);
+        $couponCollection = $this->_helper->getCouponByGroupId();
         $couponCode = [];
         foreach ($couponCollection as $couponInfo) {
             $customerGroupArray = $couponInfo->getCustomerGroupIds();

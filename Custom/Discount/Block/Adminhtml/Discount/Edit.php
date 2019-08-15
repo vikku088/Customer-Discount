@@ -22,6 +22,8 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
 		$this->_objectId = 'id';
         $this->_blockGroup = 'Custom_Discount';
         $this->_controller = 'adminhtml_discount';
+        
+        $model = $this->_coreRegistry->registry('discount_discount');
 
         parent::_construct();
 
@@ -41,6 +43,12 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
         );
         $this->_formScripts[] = "
             require(['jquery'], function($){
+                $(window).load(function() {
+                    var couponCode = '".$model->getCouponCode()."';
+                    var customers = '".$model->getCustomer()."';
+                        console.log(customers);
+                        $('#page_coupon_code').append('<option value ='+ couponCode+'>'+couponCode+'</option>');
+                    });
                 $('#page_customer_groud').on('change',function(){
                     var customerGroupName = $('#page_customer_groud :selected').text();
                     var customerGroupId = $('#page_customer_groud').val();

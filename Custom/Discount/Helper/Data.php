@@ -8,6 +8,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 	protected $_storeManager;
 	protected $_discountFactory;
 	protected $_customerSession;
+	protected $_customerCollection;
+	protected $saleRule;
 
 	/**
      * @param \Magento\Framework\App\Helper\Context $context
@@ -15,17 +17,21 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 	public function __construct(\Magento\Framework\App\Helper\Context $context,
 	\Magento\Store\Model\StoreManagerInterface $storeManager,
 	\Custom\Discount\Model\DiscountFactory $discountFactory,
-	\Magento\Customer\Model\Session $customerSession
+	\Magento\Customer\Model\Session $customerSession,
+	\Magento\Customer\Model\ResourceModel\Customer\CollectionFactory $customerFactory,
+	\Magento\SalesRule\Model\Rule $saleRule
 	) {
 		$this->_storeManager = $storeManager;
 		$this->_discountFactory = $discountFactory;
 		$this->_customerSession = $customerSession;
+		$this->_customerCollection = $customerFactory;
+		$this->saleRule = $saleRule;
 		parent::__construct($context);
 	}
 	public function getBaseUrl(){
 		return $this->_storeManager->getStore()->getBaseUrl();
 	}
-	// For Validating Coupon Code Exist in Our Module...
+	// Validating Of Coupon Code If Exist in Our Module...
 	public function validateCouponCode($couponCode){
 		$couponData = $this->_discountFactory->create()->getCollection()->addFieldToFilter('coupon_code',$couponCode)->addFieldToFilter('status',1);
 		if(count($couponData)>0){
@@ -41,6 +47,15 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 		if(count($couponData)>0){
 			return true;
 		}return false;
-
+	}
+	//Fetching Customers Collection According To GroupId...
+	public function getCustomersByGroupId($customerGroupId){
+		$customers = $this->_customerCollection->create()->addFieldToFilter('group_id',$customerGroupId);
+		return $customers;
+	}
+	//Fetching Active Cart Rules Coupons...
+	public function getCouponByGroupId(){
+		$couponCollection = $this->saleRule->getCollection()->addFieldToFilter('is_active',1);
+		return $couponCollection;
 	}
 }
