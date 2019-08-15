@@ -7,6 +7,7 @@ class CustomerInformation extends \Magento\Backend\Block\Widget\Form\Generic imp
      */
     protected $_systemStore;
     protected $_customerGroup;
+    protected $_couponCodes;
 
     /**
      * @param \Magento\Backend\Block\Template\Context $context
@@ -21,10 +22,12 @@ class CustomerInformation extends \Magento\Backend\Block\Widget\Form\Generic imp
         \Magento\Framework\Data\FormFactory $formFactory,
         \Magento\Store\Model\System\Store $systemStore,
         \Magento\Customer\Model\ResourceModel\Group\Collection $customerGroup,
+        \Custom\Discount\Model\Adminhtml\Config\Source\Coupons $couponCodes,
         array $data = array()
     ) {
         $this->_systemStore = $systemStore;
         $this->_customerGroup = $customerGroup;
+        $this->_couponCodes = $couponCodes;
         parent::__construct($context, $registry, $formFactory, $data);
     }
 
@@ -67,17 +70,18 @@ class CustomerInformation extends \Magento\Backend\Block\Widget\Form\Generic imp
                 'name' => 'customer',
                 'label' => __('customer'),
                 'title' => __('customer'),
-                /*'required' => true,*/
+                'required' => true,
             )
         );
 		$fieldset->addField(
             'coupon_code',
-            'text',
+            'select',
             array(
                 'name' => 'coupon_code',
                 'label' => __('coupon'),
                 'title' => __('coupon'),
-                /*'required' => true,*/
+                // 'values' => $this->_couponCodes->toOptionArray(),
+                'required' => true,
             )
         );
         

@@ -44,7 +44,6 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
                 $('#page_customer_groud').on('change',function(){
                     var customerGroupName = $('#page_customer_groud :selected').text();
                     var customerGroupId = $('#page_customer_groud').val();
-                    console.log(customerGroupId);
                     jQuery.ajax( {
                     
                         url: '".$this->_helper->getUrl('discount/customers/collection')."',
@@ -65,6 +64,29 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
                             }
                         }else{
                             $('#page_customer').html(' ');
+                        }
+                    });
+                    jQuery.ajax( {
+                    
+                        url: '".$this->_helper->getUrl('discount/cartrules/coupons')."',
+                        data: {customerGroupId: customerGroupId},
+                        dataType: 'json',
+                        type: 'POST'
+                    }).done(function(data) {
+                        if(data){
+                            $('#page_coupon_code').html(' ');
+                            var jsonData = [data];
+                            for(var obj in jsonData){
+                                if(jsonData.hasOwnProperty(obj)){
+                                    for(var prop in jsonData[obj]){
+                                        if(jsonData[obj].hasOwnProperty(prop)){
+                                           $('#page_coupon_code').append('<option value ='+ prop+'>'+jsonData[obj][prop]+'</option>');
+                                        }
+                                    }
+                                }
+                            }
+                        }else{
+                            $('#page_coupon_code').html(' ');
                         }
                     });
                 });

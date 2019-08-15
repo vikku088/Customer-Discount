@@ -159,7 +159,8 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
             [
                 'header' => __('status'),
                 'index' => 'status',
-                'class' => 'status'
+                'class' => 'status',
+                // 'renderer' => \Custom\Discount\Block\Adminhtml\Renderer\Status::Class,
             ]
         );
 		$this->addColumn(
