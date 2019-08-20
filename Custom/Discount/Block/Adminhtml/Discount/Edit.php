@@ -41,31 +41,36 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
             ),
             -100
         );
-        $this->_formScripts[] = "
+$this->_formScripts[] = "
             require(['jquery'], function($){
-                $(window).load(function() {
+                $(document).ready(function() {
                     var couponCode = '".$model->getCouponCode()."';
                     var customers = '".$model->getCustomer()."';
-                        console.log(customers);
-                        $('#page_coupon_code').append('<option value ='+ couponCode+'>'+couponCode+'</option>');
-                    });
-                $('#page_customer_groud').on('change',function(){
-                    var customerGroupName = $('#page_customer_groud :selected').text();
+                    customers = JSON.parse('[' + customers + ']');
+                    console.log(couponCode);
+                    console.log(JSON.parse('[' + customers + ']'));
+                    console.log('-------------------');
                     var customerGroupId = $('#page_customer_groud').val();
                     jQuery.ajax( {
-                    
                         url: '".$this->_helper->getUrl('discount/customers/collection')."',
-                        data: {customerGroupId: customerGroupId},
+                        data: {customerGroupId: customerGroupId, form_key: FORM_KEY},
                         dataType: 'json',
                         type: 'POST'
                     }).done(function(data) {
                         if(data){
+                            console.log(data);
                             var jsonData = [data];
                             for(var obj in jsonData){
                                 if(jsonData.hasOwnProperty(obj)){
                                     for(var prop in jsonData[obj]){
                                         if(jsonData[obj].hasOwnProperty(prop)){
-                                           $('#page_customer').append('<option value ='+ prop+'>'+jsonData[obj][prop]+'</option>');
+                                            customers.forEach(function(entry) {
+                                            if(entry == prop){
+                                                $('#page_customer').append('<option value ='+ prop+' selected>'+jsonData[obj][prop]+'</option>');
+                                                }else{
+                                                    $('#page_customer').append('<option value ='+ prop+'>'+jsonData[obj][prop]+'</option>');
+                                                }
+                                            });
                                         }
                                     }
                                 }
@@ -74,10 +79,71 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
                             $('#page_customer').html(' ');
                         }
                     });
+
+                    jQuery.ajax({
+                        url: '".$this->_helper->getUrl('discount/cartrules/coupons')."',
+                        data: {customerGroupId: customerGroupId, form_key: FORM_KEY},
+                        dataType: 'json',
+                        type: 'POST'
+                    }).done(function(data) {
+                        if(data){
+                            console.log(data);
+                            $('#page_coupon_code').html(' ');
+                            var jsonData = [data];
+                            for(var obj in jsonData){
+                                if(jsonData.hasOwnProperty(obj)){
+                                    for(var prop in jsonData[obj]){
+                                        if(jsonData[obj].hasOwnProperty(prop)){
+                                            if(prop == couponCode){
+                                                $('#page_coupon_code').append('<option value ='+ prop+' selected>'+jsonData[obj][prop]+'</option>');
+                                            }else{
+                                                $('#page_coupon_code').append('<option value ='+ prop+'>'+jsonData[obj][prop]+'</option>');
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }else{
+                            $('#page_coupon_code').html(' ');
+                        }
+                    });
+                    
+                    
+                    $('#page_customer_groud').on('change',function(){
+                        var customerGroupName = $('#page_customer_groud :selected').text();
+                        var customerGroupChangedId = $('#page_customer_groud').val();
+                        customerAjax(customerGroupChangedId);
+                        couponAjax(customerGroupChangedId);
+                    });
+                });
+                var customerAjax = function(customerGroupId){
+                    jQuery.ajax( {
+                        url: '".$this->_helper->getUrl('discount/customers/collection')."',
+                        data: {customerGroupId: customerGroupId, form_key: FORM_KEY},
+                        dataType: 'json',
+                        type: 'POST'
+                    }).done(function(data) {
+                        if(data){
+                            var jsonData = [data];
+                            for(var obj in jsonData){
+                                if(jsonData.hasOwnProperty(obj)){
+                                    for(var prop in jsonData[obj]){
+                                        if(jsonData[obj].hasOwnProperty(prop)){
+                                        $('#page_customer').append('<option value ='+ prop+'>'+jsonData[obj][prop]+'</option>');
+                                        }
+                                    }
+                                }
+                            }
+                        }else{
+                            $('#page_customer').html(' ');
+                        }
+                    });
+                }
+                var couponAjax = function(customerGroupId){
                     jQuery.ajax( {
                     
                         url: '".$this->_helper->getUrl('discount/cartrules/coupons')."',
-                        data: {customerGroupId: customerGroupId},
+                        data: {customerGroupId: customerGroupId, form_key: FORM_KEY},
                         dataType: 'json',
                         type: 'POST'
                     }).done(function(data) {
@@ -88,7 +154,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
                                 if(jsonData.hasOwnProperty(obj)){
                                     for(var prop in jsonData[obj]){
                                         if(jsonData[obj].hasOwnProperty(prop)){
-                                           $('#page_coupon_code').append('<option value ='+ prop+'>'+jsonData[obj][prop]+'</option>');
+                                        $('#page_coupon_code').append('<option value ='+ prop+'>'+jsonData[obj][prop]+'</option>');
                                         }
                                     }
                                 }
@@ -97,8 +163,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
                             $('#page_coupon_code').html(' ');
                         }
                     });
-                });
-            
+                }
             });
         ";
     }
