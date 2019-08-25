@@ -54,7 +54,7 @@ class GeneralInformation extends \Magento\Backend\Block\Widget\Form\Generic impl
             'select',
             array(
                 'name' => 'status',
-                'label' => __('enable'),
+                'label' => __('Enable'),
                 'title' => __('enable'),
                 'required' => true,
                 'values' => $this->_status->toOptionArray(),
@@ -65,9 +65,9 @@ class GeneralInformation extends \Magento\Backend\Block\Widget\Form\Generic impl
             'text',
             array(
                 'name' => 'name',
-                'label' => __('name'),
+                'label' => __('Name'),
                 'title' => __('name'),
-                /*'required' => true,*/
+                'required' => true,
             )
         );
 		$fieldset->addField(
@@ -75,7 +75,7 @@ class GeneralInformation extends \Magento\Backend\Block\Widget\Form\Generic impl
             'multiselect',
             array(
                 'name' => 'store_view',
-                'label' => __('store view'),
+                'label' => __('Store View'),
                 'title' => __('store view'),
                 'required' => true,
                 'values' => $this->_systemStore->getStoreValuesForForm(false, true),

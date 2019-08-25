@@ -1,5 +1,5 @@
 <?php
-namespace Custom\Discount\Block\Adminhtml\Adminhtml\Renderer;
+namespace Custom\Discount\Block\Adminhtml\Renderer;
 
 use Magento\Backend\Block\Widget\Grid\Column\Renderer\AbstractRenderer;
 use Magento\Framework\DataObject;
@@ -22,7 +22,6 @@ class Status extends AbstractRenderer
     public function render(DataObject $row)
     {       
         $rowCollection = $row->getData();
-        die("gffcgvb");
         $statusId = $rowCollection['status'];
         $getStatus = $this->_status->optionArray();
         return $getStatus[$statusId];

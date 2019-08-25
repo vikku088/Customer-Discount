@@ -47,9 +47,6 @@ $this->_formScripts[] = "
                     var couponCode = '".$model->getCouponCode()."';
                     var customers = '".$model->getCustomer()."';
                     customers = JSON.parse('[' + customers + ']');
-                    console.log(couponCode);
-                    console.log(JSON.parse('[' + customers + ']'));
-                    console.log('-------------------');
                     var customerGroupId = $('#page_customer_groud').val();
                     jQuery.ajax( {
                         url: '".$this->_helper->getUrl('discount/customers/collection')."',
@@ -58,19 +55,24 @@ $this->_formScripts[] = "
                         type: 'POST'
                     }).done(function(data) {
                         if(data){
-                            console.log(data);
                             var jsonData = [data];
+                            var match;
                             for(var obj in jsonData){
                                 if(jsonData.hasOwnProperty(obj)){
                                     for(var prop in jsonData[obj]){
                                         if(jsonData[obj].hasOwnProperty(prop)){
+                                            match =0;
                                             customers.forEach(function(entry) {
-                                            if(entry == prop){
-                                                $('#page_customer').append('<option value ='+ prop+' selected>'+jsonData[obj][prop]+'</option>');
-                                                }else{
-                                                    $('#page_customer').append('<option value ='+ prop+'>'+jsonData[obj][prop]+'</option>');
+                                                if(entry == prop){
+                                                    match = 1;
                                                 }
                                             });
+                                            if(match == 1){
+                                                $('#page_customer').append('<option value ='+ prop+' selected>'+jsonData[obj][prop]+'</option>');
+
+                                            }else{
+                                                $('#page_customer').append('<option value ='+ prop+'>'+jsonData[obj][prop]+'</option>');
+                                            }
                                         }
                                     }
                                 }
@@ -87,7 +89,6 @@ $this->_formScripts[] = "
                         type: 'POST'
                     }).done(function(data) {
                         if(data){
-                            console.log(data);
                             $('#page_coupon_code').html(' ');
                             var jsonData = [data];
                             for(var obj in jsonData){
@@ -124,6 +125,8 @@ $this->_formScripts[] = "
                         type: 'POST'
                     }).done(function(data) {
                         if(data){
+                            $('.no-customer').hide();
+                            $('#page_customer').show();
                             var jsonData = [data];
                             for(var obj in jsonData){
                                 if(jsonData.hasOwnProperty(obj)){
@@ -136,6 +139,8 @@ $this->_formScripts[] = "
                             }
                         }else{
                             $('#page_customer').html(' ');
+                            $('#page_customer').hide();
+                            $('.field-customer').append('<div class = no-customer><h2><b><div>Sorry! No Customer Found.</div><div>Please Select Another Customer Group.</b></div></h2></div>');
                         }
                     });
                 }

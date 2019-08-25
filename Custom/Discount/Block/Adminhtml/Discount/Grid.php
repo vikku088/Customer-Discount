@@ -157,10 +157,10 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
 		$this->addColumn(
             'status',
             [
-                'header' => __('status'),
+                'header' => __('Status'),
                 'index' => 'status',
                 'class' => 'status',
-                // 'renderer' => \Custom\Discount\Block\Adminhtml\Renderer\Status::Class,
+                'renderer' => \Custom\Discount\Block\Adminhtml\Renderer\Status::Class,
             ]
         );
 		$this->addColumn(
@@ -174,31 +174,34 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
 		$this->addColumn(
             'store_view',
             [
-                'header' => __('store_view'),
+                'header' => __('Store View'),
                 'index' => 'store_view',
-                'class' => 'store_view'
+                'class' => 'store_view',
+                'renderer' => \Custom\Discount\Block\Adminhtml\Renderer\Storeview::Class,
             ]
         );
 		$this->addColumn(
             'customer_groud',
             [
-                'header' => __('customer_groud'),
+                'header' => __('Customer Groud'),
                 'index' => 'customer_groud',
-                'class' => 'customer_groud'
+                'class' => 'customer_groud',
+                'renderer' => \Custom\Discount\Block\Adminhtml\Renderer\CustomerStatus::Class,
             ]
         );
 		$this->addColumn(
             'customer',
             [
-                'header' => __('customer'),
+                'header' => __('Customer'),
                 'index' => 'customer',
-                'class' => 'customer'
+                'class' => 'customer',
+                'renderer' => \Custom\Discount\Block\Adminhtml\Renderer\Customer::Class,
             ]
         );
 		$this->addColumn(
             'coupon_code',
             [
-                'header' => __('coupon_code'),
+                'header' => __('Coupon Code'),
                 'index' => 'coupon_code',
                 'class' => 'coupon_code'
             ]

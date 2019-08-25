@@ -57,7 +57,7 @@ class CustomerInformation extends \Magento\Backend\Block\Widget\Form\Generic imp
             'select',
             array(
                 'name' => 'customer_groud',
-                'label' => __('customer group'),
+                'label' => __('Customer Group'),
                 'title' => __('customer group'),
                 'required' => true,
                 'values' => $this->_customerGroup->toOptionArray(),
@@ -68,7 +68,7 @@ class CustomerInformation extends \Magento\Backend\Block\Widget\Form\Generic imp
             'multiselect',
             array(
                 'name' => 'customer',
-                'label' => __('customer'),
+                'label' => __('Customer'),
                 'title' => __('customer'),
                 'required' => true,
             )
@@ -78,9 +78,8 @@ class CustomerInformation extends \Magento\Backend\Block\Widget\Form\Generic imp
             'select',
             array(
                 'name' => 'coupon_code',
-                'label' => __('coupon'),
+                'label' => __('Coupon'),
                 'title' => __('coupon'),
-                // 'values' => $this->_couponCodes->toOptionArray(),
                 'required' => true,
             )
         );

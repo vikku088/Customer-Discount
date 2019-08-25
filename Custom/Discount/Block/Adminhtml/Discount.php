@@ -13,7 +13,7 @@ class Discount extends \Magento\Backend\Block\Widget\Grid\Container
         $this->_controller = 'adminhtml_discount';/*block grid.php directory*/
         $this->_blockGroup = 'Custom_Discount';
         $this->_headerText = __('Discount');
-        $this->_addButtonLabel = __('Add New Entry'); 
+        $this->_addButtonLabel = __('Create Customer Coupon'); 
         parent::_construct();
 		
     }
