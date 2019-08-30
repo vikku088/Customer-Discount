@@ -91,7 +91,6 @@ class CouponManagement implements CouponManagementInterface
         }
         return true;
     }
-
     /**
      * @inheritDoc
      */

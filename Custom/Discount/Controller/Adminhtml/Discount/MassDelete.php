@@ -8,16 +8,15 @@ class MassDelete extends \Magento\Backend\App\Action
      */
     public function execute()
     {
-		
-		 $ids = $this->getRequest()->getParam('id');
-		if (!is_array($ids) || empty($ids)) {
+        $ids = $this->getRequest()->getParam('id');
+        if (!is_array($ids) || empty($ids)) {
             $this->messageManager->addError(__('Please select product(s).'));
         } else {
             try {
                 foreach ($ids as $id) {
                     $row = $this->_objectManager->get('Custom\Discount\Model\Discount')->load($id);
-					$row->delete();
-				}
+                    $row->delete();
+        		}
                 $this->messageManager->addSuccess(
                     __('A total of %1 record(s) have been deleted.', count($ids))
                 );
@@ -25,6 +24,6 @@ class MassDelete extends \Magento\Backend\App\Action
                 $this->messageManager->addError($e->getMessage());
             }
         }
-		 $this->_redirect('*/*/');
+        $this->_redirect('*/*/');
     }
 }

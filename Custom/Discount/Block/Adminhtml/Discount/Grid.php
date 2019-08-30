@@ -58,12 +58,12 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Backend\Helper\Data $backendHelper,
         \Magento\Store\Model\WebsiteFactory $websiteFactory,
-		\Custom\Discount\Model\ResourceModel\Discount\Collection $collectionFactory,
+        \Custom\Discount\Model\ResourceModel\Discount\Collection $collectionFactory,
         \Magento\Framework\Module\Manager $moduleManager,
         array $data = []
     ) {
 		
-		$this->_collectionFactory = $collectionFactory;
+        $this->_collectionFactory = $collectionFactory;
         $this->_websiteFactory = $websiteFactory;
         $this->moduleManager = $moduleManager;
         parent::__construct($context, $backendHelper, $data);
@@ -99,17 +99,10 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     protected function _prepareCollection()
     {
 		try{
-			
-			
-			$collection =$this->_collectionFactory->load();
-
-		  
-
-			$this->setCollection($collection);
-
-			parent::_prepareCollection();
-		  
-			return $this;
+            $collection =$this->_collectionFactory->load();
+            $this->setCollection($collection);
+            parent::_prepareCollection();
+            return $this;
 		}
 		catch(Exception $e)
 		{
@@ -154,7 +147,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                 'column_css_class' => 'col-id'
             ]
         );
-		$this->addColumn(
+        $this->addColumn(
             'status',
             [
                 'header' => __('Status'),
@@ -163,7 +156,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                 'renderer' => \Custom\Discount\Block\Adminhtml\Renderer\Status::Class,
             ]
         );
-		$this->addColumn(
+        $this->addColumn(
             'name',
             [
                 'header' => __('name'),
@@ -171,7 +164,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                 'class' => 'name'
             ]
         );
-		$this->addColumn(
+        $this->addColumn(
             'store_view',
             [
                 'header' => __('Store View'),
@@ -180,7 +173,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                 'renderer' => \Custom\Discount\Block\Adminhtml\Renderer\Storeview::Class,
             ]
         );
-		$this->addColumn(
+        $this->addColumn(
             'customer_groud',
             [
                 'header' => __('Customer Groud'),
@@ -189,7 +182,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                 'renderer' => \Custom\Discount\Block\Adminhtml\Renderer\CustomerStatus::Class,
             ]
         );
-		$this->addColumn(
+        $this->addColumn(
             'customer',
             [
                 'header' => __('Customer'),
@@ -198,7 +191,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                 'renderer' => \Custom\Discount\Block\Adminhtml\Renderer\Customer::Class,
             ]
         );
-		$this->addColumn(
+        $this->addColumn(
             'coupon_code',
             [
                 'header' => __('Coupon Code'),

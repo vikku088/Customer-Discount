@@ -61,8 +61,8 @@ class Config extends \Magento\Framework\DataObject
         $this->_backendModel = $backendModel;
         $this->_transaction = $transaction;
         $this->_configValueFactory = $configValueFactory;
-		$this->_storeId=(int)$this->_storeManager->getStore()->getId();
-		$this->_storeCode=$this->_storeManager->getStore()->getCode();
+        $this->_storeId=(int)$this->_storeManager->getStore()->getId();
+        $this->_storeCode=$this->_storeManager->getStore()->getCode();
 	}
 	
 	/**
@@ -86,7 +86,6 @@ class Config extends \Magento\Framework\DataObject
                     'scope_code' => $this->_storeCode,
                     'value' => $value,
                 ];
-
 		$this->_backendModel->addData($data);
 		$this->_transaction->addObject($this->_backendModel);
 		$this->_transaction->save();

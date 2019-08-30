@@ -8,8 +8,8 @@ class MassStatus extends \Magento\Backend\App\Action
      */
     public function execute()
     {
-		 $ids = $this->getRequest()->getParam('id');
-		 $status = $this->getRequest()->getParam('status');
+        $ids = $this->getRequest()->getParam('id');
+        $status = $this->getRequest()->getParam('status');
 		if (!is_array($ids) || empty($ids)) {
             $this->messageManager->addError(__('Please select product(s).'));
         } else {
@@ -26,6 +26,6 @@ class MassStatus extends \Magento\Backend\App\Action
                 $this->messageManager->addError($e->getMessage());
             }
         }
-		 $this->_redirect('*/*/');
+        $this->_redirect('*/*/');
     }
 }

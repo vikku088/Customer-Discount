@@ -19,7 +19,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
     }
     protected function _construct()
     {
-		$this->_objectId = 'id';
+        $this->_objectId = 'id';
         $this->_blockGroup = 'Custom_Discount';
         $this->_controller = 'adminhtml_discount';
         
@@ -132,7 +132,7 @@ $this->_formScripts[] = "
                                 if(jsonData.hasOwnProperty(obj)){
                                     for(var prop in jsonData[obj]){
                                         if(jsonData[obj].hasOwnProperty(prop)){
-                                        $('#page_customer').append('<option value ='+ prop+'>'+jsonData[obj][prop]+'</option>');
+                                            $('#page_customer').append('<option value ='+ prop+'>'+jsonData[obj][prop]+'</option>');
                                         }
                                     }
                                 }
@@ -159,7 +159,7 @@ $this->_formScripts[] = "
                                 if(jsonData.hasOwnProperty(obj)){
                                     for(var prop in jsonData[obj]){
                                         if(jsonData[obj].hasOwnProperty(prop)){
-                                        $('#page_coupon_code').append('<option value ='+ prop+'>'+jsonData[obj][prop]+'</option>');
+                                            $('#page_coupon_code').append('<option value ='+ prop+'>'+jsonData[obj][prop]+'</option>');
                                         }
                                     }
                                 }
@@ -172,20 +172,6 @@ $this->_formScripts[] = "
             });
         ";
     }
-    protected function _prepareLayout()
-    {
-        $this->_formScripts[] = "
-            function toggleEditor() {
-                if (tinyMCE.getInstanceById('block_content') == null) {
-                    tinyMCE.execCommand('mceAddControl', false, 'hello_content');
-                } else {
-                    tinyMCE.execCommand('mceRemoveControl', false, 'hello_content');
-                }
-            }
-        ";
-        return parent::_prepareLayout();
-    }
-
     /**
      * Get edit form container header text
      *

@@ -12,7 +12,7 @@ class Save extends \Magento\Backend\App\Action
         $data = $this->getRequest()->getParams();
         if ($data) {
             $model = $this->_objectManager->create('Custom\Discount\Model\Discount');
-			$id = $this->getRequest()->getParam('id');
+            $id = $this->getRequest()->getParam('id');
             if ($id) {
                 $model->load($id);
             }
