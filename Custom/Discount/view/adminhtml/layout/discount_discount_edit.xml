@@ -3,7 +3,6 @@
      <update handle="editor"/>
     <head>
         <title>Customer Discount Coupon</title>
-        <script src="Custom_Discount::js/customerSearch.js"/>
     </head>
     <body>
 	   <referenceContainer name="content">
@@ -21,7 +20,6 @@
                     <argument name="name" xsi:type="string">customerinformation_section</argument>
                     <argument name="block" xsi:type="string">discount_discount_edit_tab_customerinformation</argument>
                 </action>
-				<!--CedAddTab-->
 			</block>
         </referenceContainer>
     </body>

@@ -14,9 +14,6 @@ use Magento\Framework\Setup\SchemaSetupInterface;
  */
 class InstallSchema implements InstallSchemaInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function install(SchemaSetupInterface $setup, ModuleContextInterface $context)
     {
 	
@@ -79,15 +76,12 @@ class InstallSchema implements InstallSchemaInterface
             [],
             'coupon_code'
         )
-		/*{{CedAddTableColumn}}}*/
-		
 		
         ->setComment(
             'Custom Discount discount_discount'
         );
 		
 		$installer->getConnection()->createTable($table);
-		/*{{CedAddTable}}*/
 
         $installer->endSetup();
 
