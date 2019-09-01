@@ -37,7 +37,7 @@ class GeneralInformation extends \Magento\Backend\Block\Widget\Form\Generic impl
     {
 		/* @var $model \Magento\Cms\Model\Page */
         $model = $this->_coreRegistry->registry('discount_discount');
-        $isElementDisabled = false;
+		$isElementDisabled = false;
         /** @var \Magento\Framework\Data\Form $form */
         $form = $this->_formFactory->create();
 
@@ -49,7 +49,7 @@ class GeneralInformation extends \Magento\Backend\Block\Widget\Form\Generic impl
             $fieldset->addField('id', 'hidden', array('name' => 'id'));
         }
 
-        $fieldset->addField(
+		$fieldset->addField(
             'status',
             'select',
             array(
@@ -60,7 +60,7 @@ class GeneralInformation extends \Magento\Backend\Block\Widget\Form\Generic impl
                 'values' => $this->_status->toOptionArray(),
             )
         );
-        $fieldset->addField(
+		$fieldset->addField(
             'name',
             'text',
             array(
@@ -70,7 +70,7 @@ class GeneralInformation extends \Magento\Backend\Block\Widget\Form\Generic impl
                 'required' => true,
             )
         );
-        $fieldset->addField(
+		$fieldset->addField(
             'store_view',
             'multiselect',
             array(
