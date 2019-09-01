@@ -40,7 +40,7 @@ class CustomerInformation extends \Magento\Backend\Block\Widget\Form\Generic imp
     {
 		/* @var $model \Magento\Cms\Model\Page */
         $model = $this->_coreRegistry->registry('discount_discount');
-        $isElementDisabled = false;
+		$isElementDisabled = false;
         /** @var \Magento\Framework\Data\Form $form */
         $form = $this->_formFactory->create();
 
@@ -52,7 +52,7 @@ class CustomerInformation extends \Magento\Backend\Block\Widget\Form\Generic imp
             $fieldset->addField('id', 'hidden', array('name' => 'id'));
         }
 
-        $fieldset->addField(
+		$fieldset->addField(
             'customer_groud',
             'select',
             array(
@@ -63,7 +63,7 @@ class CustomerInformation extends \Magento\Backend\Block\Widget\Form\Generic imp
                 'values' => $this->_customerGroup->toOptionArray(),
             )
         );
-        $fieldset->addField(
+		$fieldset->addField(
             'customer',
             'multiselect',
             array(
@@ -73,7 +73,7 @@ class CustomerInformation extends \Magento\Backend\Block\Widget\Form\Generic imp
                 'required' => true,
             )
         );
-        $fieldset->addField(
+		$fieldset->addField(
             'coupon_code',
             'select',
             array(

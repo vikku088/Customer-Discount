@@ -8,10 +8,15 @@ class Edit extends \Magento\Backend\App\Action
      */
 	public function execute()
     {
-        // 1. Get ID and create model
+		
+		
+		// 1. Get ID and create model
         $id = $this->getRequest()->getParam('id');
+		
         $model = $this->_objectManager->create('Custom\Discount\Model\Discount');
-        $registryObject = $this->_objectManager->get('Magento\Framework\Registry');
+		
+		$registryObject = $this->_objectManager->get('Magento\Framework\Registry');
+		
         // 2. Initial checking
         if ($id) {
             $model->load($id);
@@ -26,8 +31,8 @@ class Edit extends \Magento\Backend\App\Action
         if (!empty($data)) {
             $model->setData($data);
         }
-        $registryObject->register('discount_discount', $model);
-        $this->_view->loadLayout();
+		$registryObject->register('discount_discount', $model);
+		$this->_view->loadLayout();
         $this->_view->getLayout()->initMessages();
         $this->_view->renderLayout();
     }

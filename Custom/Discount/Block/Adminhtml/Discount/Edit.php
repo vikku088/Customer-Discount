@@ -19,7 +19,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
     }
     protected function _construct()
     {
-        $this->_objectId = 'id';
+		$this->_objectId = 'id';
         $this->_blockGroup = 'Custom_Discount';
         $this->_controller = 'adminhtml_discount';
         
@@ -172,6 +172,7 @@ $this->_formScripts[] = "
             });
         ";
     }
+
     /**
      * Get edit form container header text
      *

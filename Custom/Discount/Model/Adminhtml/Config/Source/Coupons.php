@@ -23,5 +23,12 @@ class Coupons implements \Magento\Framework\Option\ArrayInterface
             $couponArray[] = ['value' => $couponInfo->getCode(), 'label' => __($couponInfo->getCode())];
         }
         return $couponArray;           
-    }
+    }   
+    // public function optionArray()
+    // {
+    //     return [
+    //             self:: ENABLE => __('Enabled'), 
+    //             self:: DISABLE => __('Disabled'),
+    //         ];            
+    // } 
 }

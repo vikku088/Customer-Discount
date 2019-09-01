@@ -33,9 +33,10 @@ class Index extends Action
 
     public function execute()
     {
-        $this->resultPage = $this->resultPageFactory->create();  
-        $this->resultPage->setActiveMenu('Custom_Discount::discount');
-        $this->resultPage ->getConfig()->getTitle()->set((__('Discounts')));
-        return $this->resultPage;
+		
+		$this->resultPage = $this->resultPageFactory->create();  
+		$this->resultPage->setActiveMenu('Custom_Discount::discount');
+		$this->resultPage ->getConfig()->getTitle()->set((__('Discounts')));
+		return $this->resultPage;
     }
 }
