@@ -28,10 +28,18 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 		$this->saleRule = $saleRule;
 		parent::__construct($context);
 	}
+	/**
+	 * return Base Url
+	 * @return url
+     */
 	public function getBaseUrl(){
 		return $this->_storeManager->getStore()->getBaseUrl();
 	}
-	// Validating Of Coupon Code If Exist in Our Module...
+	/**
+     * @param CouponCode 
+	 * Validating Of Coupon Code If Exist in Our Module
+	 * @return boolen
+     */
 	public function validateCouponCode($couponCode){
 		$couponData = $this->_discountFactory->create()->getCollection()->addFieldToFilter('coupon_code',$couponCode)->addFieldToFilter('status',1);
 		if(count($couponData)>0){
@@ -39,21 +47,32 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 		}return false;
 		
 	}
+	/**
+     * @param CouponCode 
+	 * Validating Of Coupon Code according to Customer
+	 * @return boolen
+     */
 	public function validCustomer($couponCode){
 		$customerId = $this->_customerSession->getCustomer()->getId();
 		$customerGroupId = $this->_customerSession->getCustomer()->getGroupId();
-		$couponData = $this->_discountFactory->create()->getCollection()->addFieldToFilter('coupon_code',$couponCode)->addFieldToFilter('status',1)->addFieldToFilter('customer_groud',$customerGroupId)->addFieldToFilter('customer',
-			array('like' => '%'.$customerId.'%'));
+		$couponData = $this->_discountFactory->create()->getCollection()->addFieldToFilter('coupon_code',$couponCode)->addFieldToFilter('status',1)->addFieldToFilter('customer_groud',$customerGroupId)->addFieldToFilter('customer', $customerId);
 		if(count($couponData)>0){
 			return true;
 		}return false;
 	}
-	//Fetching Customers Collection According To GroupId...
+	/**
+     * @param customerGroupId 
+	 * Fetching Customers Collection According To GroupId
+	 * @return array customers
+     */
 	public function getCustomersByGroupId($customerGroupId){
 		$customers = $this->_customerCollection->create()->addFieldToFilter('group_id',$customerGroupId);
 		return $customers;
 	}
-	//Fetching Active Cart Rules Coupons...
+	/**
+	 * Fetching Active Cart Rules Coupons
+	 * @return array couponCollection
+     */
 	public function getCouponByGroupId(){
 		$couponCollection = $this->saleRule->getCollection()->addFieldToFilter('is_active',1);
 		return $couponCollection;
